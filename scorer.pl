@@ -19,7 +19,7 @@ if (@ARGV < 3) {
   print q|
 use: scorer.pl <metric> <keys_file> <response_file> [name]
 
-  metric: the metric desired to score the results:
+  metric: the metrics desired to score the results (separated by +):
     muc: MUCScorer (Vilain et al, 1995)
     bcub: B-Cubed (Bagga and Baldwin, 1998)
     ceafm: CEAF (Luo et al, 2005) using mention-based similarity
@@ -41,9 +41,11 @@ use: scorer.pl <metric> <keys_file> <response_file> [name]
 }
 
 my $metric = shift(@ARGV);
-if ($metric !~ /^(muc|bcub|ceafm|ceafe|blanc|all)/i) {
-  print "Invalid metric\n";
-  exit;
+foreach my $m (split(/\+/,$metric)){
+  if ($m !~ /^(muc|bcub|ceafm|ceafe|blanc|all)/i) {
+    print "Invalid metric: ".$m."\n";
+    exit;
+  }
 }
 
 if ($metric eq 'all') {
@@ -53,6 +55,8 @@ if ($metric eq 'all') {
   }
 }
 else {
-  &CorScorer::Score($metric, @ARGV);
+  foreach my $m (split(/\+/,$metric)){
+    print "\nMETRIC $m:\n";
+    &CorScorer::Score($m, @ARGV);
+  }
 }
-
