@@ -45,7 +45,7 @@ USAGE
      perl scorer.pl <metric> <key> <response> [<document-id>]
 
 
-     <metric>: the metric desired to score the results. one of the following values:
+     <metric>: the metrics desired to score the results (separated by +). ones of the following values:
 
      muc: MUCScorer (Vilain et al, 1995)
      bcub: B-Cubed (Bagga and Baldwin, 1998)
@@ -57,7 +57,7 @@ USAGE
      <key>: file with expected coreference chains in CoNLL-2011/2012 format
 
      <response>: file with output of coreference system (CoNLL-2011/2012 format)
- 
+
      <document-id>: optional. The name of the document to score. If name is not
                     given, all the documents in the dataset will be scored. If given
                     name is "none" then all the documents are scored but only total
