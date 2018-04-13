@@ -48,7 +48,7 @@ foreach my $m (split(/\+/,$metric)){
   }
 }
 
-if ($metric eq 'all') {
+if ( grep( /^all&/, split(/\+/,$metric)) ) {
   foreach my $m ('muc', 'bcub', 'ceafm', 'ceafe', 'blanc') {
     print "\nMETRIC $m:\n";
     &CorScorer::Score($m, @ARGV);
